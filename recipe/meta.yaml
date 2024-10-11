@@ -11,23 +11,24 @@ source:
   sha256: "{{ sha256 }}"
 
 build:
-  noarch: python
   number: 0
-  skip: True # [py<35]
+  skip: True # [py<37]
   script: "{{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vvv"
 
 requirements:
   host:
-    - pip
     - python
     - pytest-runner >=2.7
     - setuptools_scm >=3.1
+    - wheel
   run:
     - python
 
 test:
   requires:
-    - setuptools
+    - pip
+  commands:
+    - pip check
   imports:
     - dictdiffer
 
