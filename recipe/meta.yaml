@@ -1,19 +1,19 @@
 {% set name = "dictdiffer" %}
-{% set version = "0.8.0" %}
-{% set sha256 = "b3ad476fc9cca60302b52c50e1839342d2092aeaba586d69cbf9249f87f52463" %}
+{% set version = "0.9.0" %}
+{% set sha256 = "17bacf5fbfe613ccf1b6d512bd766e6b21fb798822a133aa86098b8ac9997578" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: "{{ sha256 }}"
+  sha256: {{ sha256 }}
 
 build:
-  noarch: python
   number: 0
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv "
+  skip: True # [py<37]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vv
 
 requirements:
   host:
@@ -21,12 +21,16 @@ requirements:
     - python
     - pytest-runner >=2.7
     - setuptools_scm >=3.1
+    - setuptools
+    - wheel
   run:
     - python
 
 test:
   requires:
-    - setuptools
+    - pip
+  commands:
+    - pip check
   imports:
     - dictdiffer
 
@@ -35,7 +39,9 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  summary: Dictdiffer is a library that helps you to diff and patch dictionaries.
+  summary: Dictdiffer is a helper module that helps you to diff and patch dictionaries.
+  description: |
+    Dictdiffer is a helper module that helps you to diff and patch dictionaries.
   doc_url: https://dictdiffer.readthedocs.io
   dev_url: https://github.com/inveniosoftware/dictdiffer
 
