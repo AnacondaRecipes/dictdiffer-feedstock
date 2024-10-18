@@ -3,23 +3,25 @@
 {% set sha256 = "17bacf5fbfe613ccf1b6d512bd766e6b21fb798822a133aa86098b8ac9997578" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: "{{ sha256 }}"
+  sha256: {{ sha256 }}
 
 build:
   number: 0
   skip: True # [py<37]
-  script: "{{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vvv"
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vv
 
 requirements:
   host:
+    - pip
     - python
     - pytest-runner >=2.7
     - setuptools_scm >=3.1
+    - setuptools
     - wheel
   run:
     - python
