@@ -1,14 +1,13 @@
 {% set name = "dictdiffer" %}
 {% set version = "0.10.0" %}
-{% set sha256 = "0b912acf663949d73b820d3ed59362140a188ab742c94efe13c762dbd24cbbd3" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: 0b912acf663949d73b820d3ed59362140a188ab742c94efe13c762dbd24cbbd3
 
 build:
   number: 0
